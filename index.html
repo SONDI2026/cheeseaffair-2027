@@ -26,9 +26,27 @@ header.top img{height:56px;width:auto;display:block}
 .hero .fakt small{display:block;font-size:.78rem;opacity:.85}
 .hero .fakt strong{font-size:1.05rem}
 nav.menu{background:var(--weiss);border-bottom:1px solid var(--linie);position:sticky;top:0;z-index:10}
-nav.menu .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px;padding-bottom:8px}
-nav.menu a{white-space:nowrap;text-decoration:none;font-size:.85rem;font-weight:600;color:var(--blau);padding:6px 12px;border-radius:20px}
+nav.menu .wrap{padding-top:8px;padding-bottom:8px}
+nav.menu .links{display:flex;flex-wrap:wrap;justify-content:center;gap:2px 4px}
+nav.menu a{text-decoration:none;font-size:.85rem;font-weight:600;color:var(--blau);padding:6px 12px;border-radius:20px}
 nav.menu a:hover{background:var(--grau)}
+.burger{display:none;align-items:center;gap:10px;width:100%;background:none;border:0;font:inherit;font-weight:700;color:var(--blau);padding:8px 4px;cursor:pointer}
+.burger .balken,.burger .balken::before,.burger .balken::after{display:block;width:22px;height:3px;background:var(--blau);border-radius:2px;position:relative;content:""}
+.burger .balken::before{position:absolute;top:-7px}
+.burger .balken::after{position:absolute;top:7px}
+.tabelle{width:100%;border-collapse:collapse}
+.tabelle th,.tabelle td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--linie)}
+.tabelle th{background:var(--grau);color:var(--blau);font-size:.85rem}
+.tabelle tbody tr:last-child td{border-bottom:0}
+a.plan{display:block;max-width:640px}
+a.plan img{display:block;width:100%;height:auto;border:1px solid var(--linie);border-radius:6px}
+.checkliste ul{list-style:none;margin:0;padding:0}
+.checkliste li{border-bottom:1px solid var(--linie)}
+.checkliste label{display:flex;gap:12px;align-items:flex-start;padding:9px 2px;cursor:pointer}
+.checkliste input{width:20px;height:20px;margin-top:2px;accent-color:var(--blau);flex:none}
+.checkliste input:checked + span{text-decoration:line-through;color:#8a93a5}
+.checkliste .stand{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px;font-weight:600;color:var(--blau);font-size:.9rem}
+.checkliste button{font:inherit;font-size:.8rem;background:none;border:1px solid var(--linie);border-radius:4px;padding:3px 10px;cursor:pointer;color:#566176}
 main{padding:28px 0 48px}
 .raster{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .karte{background:var(--weiss);border-radius:8px;border-top:4px solid var(--blau);padding:22px 24px;box-shadow:0 1px 3px rgba(22,76,156,.08)}
@@ -50,6 +68,12 @@ ul.termine .tag{flex:0 0 150px;font-weight:700;color:var(--blau)}
 footer{background:var(--blau);color:#fff;padding:22px 0;font-size:.88rem}
 footer a{color:#fff}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+@media (max-width:900px){
+ .burger{display:flex}
+ nav.menu .links{display:none;flex-direction:column;flex-wrap:nowrap;align-items:stretch;padding-bottom:6px}
+ nav.menu .links.offen{display:flex}
+ nav.menu a{padding:10px 12px;border-radius:6px}
+}
 @media (max-width:720px){
  .raster{grid-template-columns:1fr}
  dl.daten{grid-template-columns:1fr;gap:0}
@@ -78,17 +102,21 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
 
 <nav class="menu" aria-label="Seitenmenü">
   <div class="wrap">
-    <a href="#datum">Datum</a>
-    <a href="#oeffnungszeiten">Öffnungszeiten</a>
-    <a href="#stand">Stand</a>
-    <a href="#dresscode">Dresscode</a>
-    <a href="#teilnehmer">Teilnehmer</a>
-    <a href="#eintrittskarten">Eintrittskarten</a>
-    <a href="#maschinen">Maschinenliste</a>
-    <a href="#aufbau">Aufbau</a>
-    <a href="#abbau">Abbau</a>
-    <a href="#parkplaetze">Parkplätze</a>
-    <a href="#hotel">Hotel</a>
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menuliste"><span class="balken" aria-hidden="true"></span>Menü</button>
+    <div class="links" id="menuliste">
+      <a href="#datum">Datum</a>
+      <a href="#oeffnungszeiten">Öffnungszeiten</a>
+      <a href="#stand">Stand</a>
+      <a href="#dresscode">Dresscode</a>
+      <a href="#teilnehmer">Teilnehmer</a>
+      <a href="#eintrittskarten">Eintrittskarten</a>
+      <a href="#maschinen">Maschinenliste</a>
+      <a href="#material">Materialliste</a>
+      <a href="#aufbau">Aufbau</a>
+      <a href="#abbau">Abbau</a>
+      <a href="#parkplaetze">Parkplätze</a>
+      <a href="#hotel">Hotel</a>
+    </div>
   </div>
 </nav>
 
@@ -99,8 +127,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   <section class="karte" id="datum">
     <h2>Datum</h2>
     <p><strong>Montag, 8. Februar 2027</strong> und<br><strong>Dienstag, 9. Februar 2027</strong></p>
-    <p>Alte Reithalle Aarau</p>
-    <p><a href="https://www.google.com/maps/search/Alte+Reithalle+Aarau" target="_blank" rel="noopener">Google Maps</a></p>
+    <p><a href="https://www.google.com/search?kgmid=%2Fg%2F11bvt14cj6" target="_blank" rel="noopener">Alte Reithalle Aarau</a>, Apfelhausenweg 20, 5000 Aarau</p>
   </section>
 
   <section class="karte" id="oeffnungszeiten">
@@ -108,7 +135,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     <h3>Montag, 8. Februar 2027</h3>
     <dl class="daten">
       <dt>10:00 – 17:00 Uhr</dt><dd>Messe</dd>
-      <dt>17:00 – 20:00 Uhr</dt><dd>Branchenabend</dd>
+      <dt>ab 17:00 Uhr</dt><dd>Netzwerkabend</dd>
     </dl>
     <h3>Dienstag, 9. Februar 2027</h3>
     <dl class="daten">
@@ -120,23 +147,34 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     <h2>Standinformationen</h2>
     <dl class="daten">
       <dt>Messe</dt><dd>CHEESEAFFAIR 2027 – Nationale Handelstage für Schweizer Käse</dd>
-      <dt>Veranstalter</dt><dd>RUUF AG, Zürich (Initiative der SGWH)</dd>
-      <dt>Standnummer</dt><dd><span class="folgt">Informationen folgen</span></dd>
+      <dt>Adresse</dt><dd><a href="https://www.google.com/search?kgmid=%2Fg%2F11bvt14cj6" target="_blank" rel="noopener">Alte Reithalle Aarau</a>, Apfelhausenweg 20, 5000 Aarau</dd>
+      <dt>Standnummer</dt><dd><strong>236</strong></dd>
       <dt>Standgrösse</dt><dd><span class="folgt">Informationen folgen</span></dd>
-      <dt>Platzierung</dt><dd><a href="https://www.cheeseaffair.ch/aussteller" target="_blank" rel="noopener">cheeseaffair.ch/aussteller</a></dd>
-      <dt>Standausstattung</dt><dd><span class="folgt">Informationen folgen</span></dd>
-      <dt>Grafik Rückwand</dt><dd>Druckfertige Dateien bis 27. November 2026 an RUUF AG</dd>
     </dl>
+    <h3>Lageplan</h3>
+    <a class="plan" href="lageplan.png" target="_blank" rel="noopener" title="Lageplan in voller Grösse öffnen">
+      <img src="lageplan.png" alt="Lageplan CHEESEAFFAIR 2027 mit dem SONDI-Stand Nr. 236 orange markiert">
+    </a>
+    <p class="hinweis">Unser Stand 236 ist orange markiert. Zum Vergrössern auf den Plan klicken.</p>
   </section>
 
   <section class="karte" id="dresscode">
     <h2>Dresscode</h2>
-    <span class="folgt">Informationen folgen</span>
+    <p>SONDI-Kleider</p>
   </section>
 
   <section class="karte" id="teilnehmer">
     <h2>Teilnehmer</h2>
-    <span class="folgt">Informationen folgen</span>
+    <table class="tabelle">
+      <thead><tr><th scope="col">Name</th><th scope="col">Funktion</th></tr></thead>
+      <tbody>
+        <tr><td>Thomas Corleis</td><td>Standmitarbeiter</td></tr>
+        <tr><td>Jürg Schärer</td><td>Standmitarbeiter</td></tr>
+        <tr><td>Werner Bächtiger</td><td>Standmitarbeiter</td></tr>
+        <tr><td>Olga Tsyplakova</td><td>Marketing</td></tr>
+        <tr><td>Jara Haffter</td><td>Organisation</td></tr>
+      </tbody>
+    </table>
   </section>
 
   <section class="karte breit" id="eintrittskarten">
@@ -148,9 +186,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
     <p>Das Ticketportal ist ab November 2026 online: <a href="https://www.cheeseaffair.ch/ticket" target="_blank" rel="noopener">cheeseaffair.ch/ticket</a></p>
   </section>
 
-  <section class="karte breit" id="maschinen">
+  <section class="karte" id="maschinen">
     <h2>Maschinenliste</h2>
-    <span class="folgt">Informationen folgen</span>
+    <div class="checkliste" data-liste="maschinen"></div>
+  </section>
+
+  <section class="karte" id="material">
+    <h2>Materialliste</h2>
+    <div class="checkliste" data-liste="material"></div>
   </section>
 
   <section class="karte breit" id="aufbau">
@@ -205,5 +248,49 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
   </div>
 </footer>
 
+<script>
+(function(){
+  /* Menü (Hamburger auf kleinen Bildschirmen) */
+  var b=document.getElementById('burger'),m=document.getElementById('menuliste');
+  b.addEventListener('click',function(){
+    var o=m.classList.toggle('offen');b.setAttribute('aria-expanded',o);
+  });
+  m.addEventListener('click',function(e){
+    if(e.target.tagName==='A'){m.classList.remove('offen');b.setAttribute('aria-expanded','false');}
+  });
+
+  /* Listen: hier die Positionen eintragen, z. B. "Hochdruckreiniger XY (2 Stück)" */
+  var LISTEN={
+    maschinen:[],
+    material:[]
+  };
+
+  function laden(k){try{return JSON.parse(localStorage.getItem('cheese27-'+k))||{};}catch(e){return {};}}
+  function speichern(k,v){try{localStorage.setItem('cheese27-'+k,JSON.stringify(v));}catch(e){}}
+
+  document.querySelectorAll('.checkliste').forEach(function(box){
+    var k=box.dataset.liste,items=LISTEN[k]||[];
+    if(!items.length){box.innerHTML='<span class="folgt">Informationen folgen</span>';return;}
+    var stand=laden(k);
+    var kopf=document.createElement('div');kopf.className='stand';
+    var zaehler=document.createElement('span');
+    var reset=document.createElement('button');reset.type='button';reset.textContent='Zurücksetzen';
+    kopf.appendChild(zaehler);kopf.appendChild(reset);
+    var ul=document.createElement('ul');
+    function zeigen(){var n=0;items.forEach(function(_,i){if(stand[i])n++;});zaehler.textContent=n+' von '+items.length+' eingepackt';}
+    items.forEach(function(text,i){
+      var li=document.createElement('li'),lb=document.createElement('label'),cb=document.createElement('input'),sp=document.createElement('span');
+      cb.type='checkbox';cb.checked=!!stand[i];sp.textContent=text;
+      cb.addEventListener('change',function(){stand[i]=cb.checked;speichern(k,stand);zeigen();});
+      lb.appendChild(cb);lb.appendChild(sp);li.appendChild(lb);ul.appendChild(li);
+    });
+    reset.addEventListener('click',function(){
+      if(!confirm('Alle Häkchen dieser Liste entfernen?'))return;
+      stand={};speichern(k,stand);ul.querySelectorAll('input').forEach(function(c){c.checked=false;});zeigen();
+    });
+    box.appendChild(kopf);box.appendChild(ul);zeigen();
+  });
+})();
+</script>
 </body>
 </html>
